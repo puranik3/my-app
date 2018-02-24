@@ -10,10 +10,18 @@ Template.homeIndex.helpers({
         //     return featuredProductSkus.indexOf( product.sku ) !== -1;
         // });
 
-        return Products.find({
-            sku: {
-                $in: featuredProductSkus
+        return Products.find(
+            {
+                sku: {
+                    $in: featuredProductSkus
+                }
+            },
+            {
+                fields : {
+                    inventory: false,
+                    cost: false
+                }
             }
-        });
+        );
     }
 });

@@ -176,3 +176,17 @@ if( Products.find().count() === 0 ) {
         Products.insert( product );
     });
 }
+
+if( Meteor.users.find().count() === 0 ) {
+    let id = Accounts.createUser({ // will create and add to users collection
+        name: 'admin',
+        email: 'admin@example.com',
+        password: 'admin123',
+        profile: {
+            name: 'Big Admin'
+        },
+        roles: []
+    });
+
+    Roles.addUsersToRoles( id, [ 'admin' ] );
+}
