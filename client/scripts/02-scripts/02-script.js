@@ -1,0 +1,1 @@
+console.log( '02-script/02-script.js' );
