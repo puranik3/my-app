@@ -5,8 +5,15 @@ Template.homeIndex.helpers({
             'johnny-liftoff',
             'moon-races'
         ];
-        return products.filter(function( product ) {
-            return featuredProductSkus.indexOf( product.sku ) !== -1;
+        
+        // return products.filter(function( product ) {
+        //     return featuredProductSkus.indexOf( product.sku ) !== -1;
+        // });
+
+        return Products.find({
+            sku: {
+                $in: featuredProductSkus
+            }
         });
     }
 });

@@ -22,3 +22,10 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 twbs:bootstrap
 iron:router
 pcel:loading
+accounts-github
+google-config-ui
+github-config-ui
+stylus
+ian:accounts-ui-bootstrap-3
+accounts-password
+alanning:roles

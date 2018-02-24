@@ -17,6 +17,13 @@
                     <li><a href="{{pathFor 'about'}}">About</a></li>
                     <li><a href="{{pathFor 'contact'}}">Contact</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- we have added alanning:roles -->
+                    {{#if isInRole 'admin'}}
+                        <li><a href="/admin">Admin</a></li>
+                    {{/if}}
+                    {{> loginButtons}} <!-- here -->
+                </ul>
             </div>
         </div>
     </nav>
