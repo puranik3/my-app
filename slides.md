@@ -206,3 +206,98 @@ Add package
 
 Add a nav item Admin inside {{ #if isInRole 'Administrator' }} {{ /if }} block
 
+20. Adding a Products collection
+In lib/collection/products.js
+```
+Products = new Mongo.Collection( 'Products' );
+
+Products.featured = function() {
+    var featuredSkus = [
+        'illudium-q36',
+        'johnny-liftoff',
+        'mars-mobile'
+    ];
+    return Products.find({
+        sku: {
+            $in: featuredSkus
+        }
+    });
+    
+};
+```
+
+In server/seed.js
+Define product seed data array. Upload it after checking if there are no products.
+```
+if( Products.find().count() === 0 ) {
+    _.forEach(productsSeed, function( product ) {
+        Products.insert( product );
+        console.log( product.name + ' inserted into the database' );
+    });
+}
+```
+
+21. Restricting fields in result of find() - do this for featured products
+Pass 2nd argument - { 
+    "fields" : {
+        "inventory": false,
+        "cost": false
+    }
+}
+- This restricts on fetch
+- But anyone can update by id from console
+    - Products.update(
+        "B5WhrBGdeXgvWenk6",
+        {
+            $set: {
+                price: 0
+            }
+        }
+    )
+
+22. Allow all CRUD operations on Products for Admin - rest can only fetch
+- .allow() and .deny() of collection restrict access to collection methods based on conditions
+- Create isAdmin method in lib/permissions.js. This uses the current user (Meteor.user()) along with Roles.isUserInRole( user, array_of_roles ) to test admin
+- Seed user data after checking if no Meteor.users exist
+    var id = Accounts.createUser({
+        username:
+        email:
+        password:
+        profile: {
+            name: 'Big Admin'
+        },
+        roles: []
+    })
+    Roles.addUsersToRoles( id, [ 'Administrator' ] )
+- Products.allow({
+    update: function( userid, product ) {
+        return isAdmin();
+    },
+    insert: - ditto -,
+    remove: - ditto -
+})
+
+Now only admin can execute this...
+Products.update( "B5WhrBGdeXgvWenk6", { $set: { price: 2321}} );
+
+23. We can remove DB writes or all collections (except those explicity allowed) by removing insecure
+```meteor remove insecure```
+Again only admin can execute this...
+Products.update( "B5WhrBGdeXgvWenk6", { $set: { price: 2321}} );
+
+24. Adding Vendors
+
+25. Adding Namespace code to every file
+
+26. Add a Carts collections. Define a function Carts.getCart( userKey ). This checks if user has a cart and returns. Else, it creates a new cart and returns it
+```
+{
+    userKey: userKey,
+    created_at: new Date,
+    notes: [],
+    items: [],
+    itemCount: 0,
+    total: 0
+};
+```
+Next add lib/shopping_cart.js
