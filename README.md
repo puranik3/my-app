@@ -1,5 +1,11 @@
 # Meteor
 
+## Videos
+* [Feb 23, 2018 Part 3](https://s3.amazonaws.com/corporate-trainings/tata-elxsi/feb-21-24-nodejs-meteor/recordings/feb-23-2018-part-3.mp4)
+* [Feb 24, 2018 Part 1](https://s3.amazonaws.com/corporate-trainings/tata-elxsi/feb-21-24-nodejs-meteor/recordings/feb-24-2018-part-1.mp4)
+* [Feb 24, 2018 Part 2](https://s3.amazonaws.com/corporate-trainings/tata-elxsi/feb-21-24-nodejs-meteor/recordings/feb-24-2018-part-2.mp4)
+
+
 ## Introduction
 - Server-side
 - Client-side - SPA
